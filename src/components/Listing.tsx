@@ -1,12 +1,18 @@
-function Listing({ items }) {
+import { etsy } from "./interface";
+import { FC } from 'react'
 
+interface ListingProps {
+    items: etsy[]
+}
+
+const Listing:FC<ListingProps> = ({ items }) => {
     return (
         <div className="item-list">
             {items.map((item) => {
                 if (!item.MainImage) return null;
                 const { listing_id, url, MainImage, title, currency_code, price, quantity} = item;
                 const imgSrc = MainImage.url_570xN;
-                const currentTitle = title.lenght < 50 ? title + '...' : title.slice(0, 50) + '...';
+                const currentTitle = title.length < 50 ? title + '...' : title.slice(0, 50) + '...';
                 let currentCurrency = currency_code + ' ';
                 if (currency_code === 'USD') {
                     currentCurrency = '$'
